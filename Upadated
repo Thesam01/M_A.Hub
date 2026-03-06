@@ -1,0 +1,2148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="M&A Hub - Global Platform. Real-time deal flow, sector analysis, and AI-powered market intelligence.">
+    <meta name="keywords" content="M&A, Mergers, Acquisitions, Deals, Intelligence, Investment Banking">
+    <title>M&A Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Light Mode */
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --bg-tertiary: #f0f2f5;
+            --text-primary: #1a1a2e;
+            --text-secondary: #4a4a6a;
+            --text-tertiary: #7a7a8a;
+            --border-color: #e0e0e0;
+            --accent-gold: #c9a84c;
+            --accent-gold-dim: #8b7a3a;
+            --accent-green: #4caf7d;
+            --accent-red: #cf4444;
+            --accent-blue: #4a8fc1;
+            --accent-purple: #7c3aed;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+            --shadow-md: 0 4px 16px rgba(0,0,0,0.12);
+            --shadow-lg: 0 8px 32px rgba(0,0,0,0.15);
+        }
+
+        :root.dark-mode {
+            /* Dark Mode */
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #15151d;
+            --bg-tertiary: #1f1f2a;
+            --text-primary: #e8e8f0;
+            --text-secondary: #b8b8c8;
+            --text-tertiary: #7a7a8a;
+            --border-color: #2a2a35;
+            --accent-gold: #c9a84c;
+            --accent-gold-dim: #8b7a3a;
+            --accent-green: #4caf7d;
+            --accent-red: #cf4444;
+            --accent-blue: #4a8fc1;
+            --accent-purple: #7c3aed;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.3);
+            --shadow-md: 0 4px 16px rgba(0,0,0,0.4);
+            --shadow-lg: 0 8px 32px rgba(0,0,0,0.5);
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* ===== NAVBAR ===== */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            height: 70px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode nav {
+            background: rgba(10, 10, 15, 0.95);
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .nav-back-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.2s;
+            padding: 0.5rem;
+        }
+
+        .nav-back-btn:hover {
+            color: var(--accent-gold);
+        }
+
+        .nav-back-btn.visible {
+            display: block;
+        }
+
+        .nav-logo {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .nav-logo span {
+            color: var(--accent-gold);
+        }
+
+        .nav-center {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-center a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+            cursor: pointer;
+        }
+
+        .nav-center a:hover, .nav-center a.active {
+            color: var(--accent-gold);
+        }
+
+        .nav-right {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .theme-toggle {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.2s;
+        }
+
+        .theme-toggle:hover {
+            background: var(--accent-gold);
+            color: white;
+            border-color: var(--accent-gold);
+        }
+
+        .btn-access {
+            background: linear-gradient(135deg, var(--accent-gold) 0%, #d4af57 100%);
+            color: white;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-access:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* ===== TICKER ===== */
+        .ticker {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            right: 0;
+            background: var(--bg-secondary);
+            border-bottom: 2px solid var(--accent-gold);
+            padding: 0.75rem 0;
+            overflow: hidden;
+            z-index: 999;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .ticker-label {
+            padding: 0 1.5rem;
+            color: var(--accent-gold);
+            font-weight: 700;
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            white-space: nowrap;
+            border-right: 2px solid var(--accent-gold);
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--bg-secondary);
+            position: relative;
+            z-index: 10;
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .ticker-content {
+            display: flex;
+            gap: 3rem;
+            animation: scroll 40s linear infinite;
+            padding: 0 1.5rem;
+            white-space: nowrap;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .ticker-item {
+            display: flex;
+            gap: 0.75rem;
+            font-size: 0.8rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 500;
+        }
+
+        .ticker-item .symbol {
+            color: var(--accent-gold);
+            font-weight: 700;
+        }
+
+        .ticker-item .price {
+            color: var(--text-primary);
+        }
+
+        .ticker-item.up .change {
+            color: var(--accent-green);
+        }
+
+        .ticker-item.dn .change {
+            color: var(--accent-red);
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        main {
+            margin-top: 120px;
+            min-height: calc(100vh - 120px);
+        }
+
+        .section {
+            display: none;
+            animation: fadeSection 0.4s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeSection {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== LANDING PAGE ===== */
+        .landing-page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+        }
+
+        .landing-hero {
+            text-align: center;
+            margin-bottom: 4rem;
+            animation: slideUp 0.6s ease;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .landing-hero h1 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            letter-spacing: -0.03em;
+            line-height: 1.2;
+        }
+
+        .landing-hero h1 span {
+            background: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-purple) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .landing-hero p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+        }
+
+        .landing-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 4rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .stat-card {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--accent-gold);
+        }
+
+        .stat-card-num {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--accent-gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .landing-cta {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-card {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 3rem 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(201, 168, 76, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .cta-card:hover::before {
+            left: 100%;
+        }
+
+        .cta-card:hover {
+            border-color: var(--accent-gold);
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .cta-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+        }
+
+        .cta-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-btn {
+            background: linear-gradient(135deg, var(--accent-gold) 0%, #d4af57 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .cta-btn:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* ===== SECTION CONTENT ===== */
+        .section-content {
+            padding: 2rem 4rem 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .sec-eyebrow {
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--accent-gold);
+            margin-bottom: 0.75rem;
+            font-weight: 700;
+        }
+
+        .sec-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
+            margin-bottom: 0.75rem;
+        }
+
+        .sec-title em {
+            color: var(--accent-gold);
+            font-style: normal;
+        }
+
+        .sec-desc {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            line-height: 1.8;
+        }
+
+        .divider {
+            height: 2px;
+            background: linear-gradient(90deg, var(--border-color) 0%, transparent 100%);
+            margin: 2.5rem 0;
+        }
+
+        /* ===== STATS GRID ===== */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .stat-box {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .stat-box:hover {
+            border-color: var(--accent-gold);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-4px);
+        }
+
+        .stat-num {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--accent-gold);
+            letter-spacing: -0.02em;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+            margin-top: 0.75rem;
+            font-weight: 600;
+        }
+
+        .stat-change {
+            font-size: 0.8rem;
+            margin-top: 0.75rem;
+            font-weight: 600;
+        }
+
+        .stat-change.up {
+            color: var(--accent-green);
+        }
+
+        .stat-change.dn {
+            color: var(--accent-red);
+        }
+
+        /* ===== FILTER BAR ===== */
+        .filter-bar {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-bar input,
+        .filter-bar select {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.75rem 1rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            outline: none;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .filter-bar input:focus,
+        .filter-bar select:focus {
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.1);
+        }
+
+        .filter-bar input {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        /* ===== DEALS TABLE ===== */
+        .table-wrapper {
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .deals-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .deals-table thead {
+            background: var(--bg-secondary);
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .deals-table th {
+            text-align: left;
+            padding: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            font-size: 0.8rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .deals-table td {
+            padding: 1.25rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .deals-table tbody tr {
+            transition: all 0.2s;
+        }
+
+        .deals-table tbody tr:hover {
+            background: var(--bg-secondary);
+        }
+
+        .deal-value {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent-gold);
+            font-weight: 700;
+        }
+
+        .deal-status {
+            display: inline-block;
+            padding: 0.4rem 0.8rem;
+            font-size: 0.7rem;
+            font-weight: 700;
+            border-radius: 6px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .deal-status.status-pending {
+            background: rgba(201, 168, 76, 0.15);
+            color: var(--accent-gold);
+        }
+
+        .deal-status.status-closed {
+            background: rgba(76, 175, 125, 0.15);
+            color: var(--accent-green);
+        }
+
+        .deal-status.status-rumored {
+            background: rgba(122, 122, 138, 0.15);
+            color: var(--text-secondary);
+        }
+
+        /* ===== TABS ===== */
+        .deal-era-tabs {
+            display: flex;
+            gap: 0;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .deal-era-btn {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            padding: 1.25rem 1.75rem;
+            font-size: 0.95rem;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 600;
+        }
+
+        .deal-era-btn.active {
+            color: var(--accent-gold);
+            border-bottom-color: var(--accent-gold);
+        }
+
+        .era-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .era-dot.present-dot {
+            background: var(--accent-gold);
+        }
+
+        .era-dot.past-dot {
+            background: var(--accent-green);
+        }
+
+        .era-dot.future-dot {
+            background: var(--accent-blue);
+        }
+
+        /* ===== SECTOR TABS ===== */
+        .sector-tabs {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .sector-tab {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 0.7rem 1.25rem;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        .sector-tab:hover {
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+        }
+
+        .sector-tab.active {
+            background: linear-gradient(135deg, var(--accent-gold) 0%, #d4af57 100%);
+            color: white;
+            border-color: var(--accent-gold);
+        }
+
+        /* ===== COMPANY GRID ===== */
+        .company-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .company-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .company-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-gold), var(--accent-purple));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s;
+        }
+
+        .company-card:hover {
+            border-color: var(--accent-gold);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-6px);
+        }
+
+        .company-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .co-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.25rem;
+        }
+
+        .co-name {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+
+        .co-meta {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-top: 0.35rem;
+        }
+
+        .co-price {
+            text-align: right;
+        }
+
+        .co-price-val {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .co-price-val.up {
+            color: var(--accent-green);
+        }
+
+        .co-price-val.dn {
+            color: var(--accent-red);
+        }
+
+        .co-price-chg {
+            font-size: 0.75rem;
+            margin-top: 0.35rem;
+            font-weight: 600;
+        }
+
+        .co-price-chg.up {
+            color: var(--accent-green);
+        }
+
+        .co-price-chg.dn {
+            color: var(--accent-red);
+        }
+
+        .co-badges {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.25rem;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(201, 168, 76, 0.15);
+            color: var(--accent-gold);
+            padding: 0.35rem 0.75rem;
+            font-size: 0.7rem;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+
+        .badge-dim {
+            background: rgba(122, 122, 138, 0.15);
+            color: var(--text-secondary);
+        }
+
+        .co-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1.25rem;
+        }
+
+        .co-cta {
+            font-size: 0.8rem;
+            color: var(--accent-gold);
+            font-weight: 700;
+            cursor: pointer;
+            transition: color 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .co-cta:hover {
+            color: var(--accent-purple);
+        }
+
+        /* ===== REGION CARDS ===== */
+        .three-col {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .region-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .region-card:hover {
+            border-color: var(--accent-gold);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-6px);
+        }
+
+        .region-flag {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .region-name {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 0.35rem;
+        }
+
+        .region-count {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.25rem;
+            font-weight: 500;
+        }
+
+        .region-vol {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--accent-gold);
+        }
+
+        .region-vol-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-secondary);
+            margin-top: 0.35rem;
+            font-weight: 600;
+        }
+
+        /* ===== ALERTS ===== */
+        .alerts-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .alert-item {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+            padding: 1rem 1.25rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+
+        .alert-item:hover {
+            border-color: var(--accent-gold);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .alert-tag {
+            font-weight: 700;
+            font-size: 0.75rem;
+            white-space: nowrap;
+            background: rgba(201, 168, 76, 0.15);
+            color: var(--accent-gold);
+            padding: 0.35rem 0.75rem;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .alert-text {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* ===== SIGNAL CARDS ===== */
+        .signal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .signal-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .signal-card:hover {
+            border-color: var(--accent-gold);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-6px);
+        }
+
+        .signal-badge {
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+            padding: 0.5rem 0.75rem;
+            display: inline-block;
+            border-radius: 4px;
+        }
+
+        .signal-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .signal-body {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* ===== CHAT ===== */
+        .analysis-layout {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 1.5rem;
+        }
+
+        .chat-container {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            height: 550px;
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+        }
+
+        .chat-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--bg-tertiary);
+        }
+
+        .chat-header-title {
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            font-weight: 700;
+        }
+
+        .chat-status {
+            font-size: 0.75rem;
+            color: var(--accent-green);
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .chat-status::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--accent-green);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .msg {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+
+        .msg-ai {
+            align-items: flex-start;
+        }
+
+        .msg-user {
+            align-items: flex-end;
+        }
+
+        .msg-label {
+            font-size: 0.7rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: var(--text-secondary);
+        }
+
+        .msg-ai .msg-label {
+            color: var(--accent-gold);
+        }
+
+        .msg-ai > div:not(.msg-label) {
+            background: var(--bg-tertiary);
+            padding: 1rem;
+            border-radius: 8px;
+            max-width: 80%;
+            color: var(--text-secondary);
+        }
+
+        .msg-user > div:not(.msg-label) {
+            background: linear-gradient(135deg, var(--accent-gold) 0%, #d4af57 100%);
+            padding: 1rem;
+            border-radius: 8px;
+            max-width: 80%;
+            color: white;
+        }
+
+        .chat-input-row {
+            display: flex;
+            gap: 0.75rem;
+            padding: 1.25rem;
+            border-top: 1px solid var(--border-color);
+            background: var(--bg-tertiary);
+        }
+
+        .chat-input {
+            flex: 1;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.75rem 1rem;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.85rem;
+            outline: none;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .chat-input:focus {
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.1);
+        }
+
+        .chat-send {
+            background: linear-gradient(135deg, var(--accent-gold) 0%, #d4af57 100%);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-weight: 700;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-radius: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .chat-send:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .quick-queries {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .quick-label {
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .quick-btns {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .quick-btn {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 0.75rem 1rem;
+            font-size: 0.75rem;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-radius: 6px;
+            line-height: 1.5;
+            font-weight: 500;
+        }
+
+        .quick-btn:hover {
+            border-color: var(--accent-gold);
+            background: var(--bg-secondary);
+            color: var(--accent-gold);
+        }
+
+        .card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* ===== MAKE DEALS ===== */
+        .md-sector-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .md-sector-card {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .md-sector-card:hover {
+            border-color: var(--accent-gold);
+            background: var(--bg-tertiary);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-6px);
+        }
+
+        .md-sector-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .md-sector-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 0.35rem;
+        }
+
+        .md-sector-sub {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.25rem;
+            line-height: 1.6;
+        }
+
+        .md-sector-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            padding-top: 1.25rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .md-sector-stat-num {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 800;
+        }
+
+        .md-sector-stat-lbl {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-secondary);
+            margin-top: 0.35rem;
+            font-weight: 600;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 3rem 4rem;
+            margin-top: 4rem;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 2rem;
+            align-items: center;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .footer-logo {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+
+        .footer-logo span {
+            color: var(--accent-gold);
+        }
+
+        .footer-text {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 0.35rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2.5rem;
+            justify-content: center;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.2s;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-gold);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .section-content {
+                padding: 2rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .three-col {
+                grid-template-columns: 1fr;
+            }
+
+            .analysis-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .landing-cta {
+                grid-template-columns: 1fr;
+            }
+
+            .landing-stats {
+                grid-template-columns: 1fr;
+            }
+
+            footer {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 0.75rem 1rem;
+                height: auto;
+            }
+
+            .nav-center {
+                display: none;
+            }
+
+            .nav-logo {
+                font-size: 1.2rem;
+            }
+
+            .sec-title {
+                font-size: 2rem;
+            }
+
+            .landing-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .company-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .md-sector-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-content {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav>
+        <div class="nav-left">
+            <button class="nav-back-btn" id="backBtn" onclick="goHome()">← Back</button>
+            <a class="nav-logo" onclick="goHome()">M&A <span>Hub</span></a>
+        </div>
+        <ul class="nav-center" id="navLinks">
+            <li><a onclick="showSection('deals')" class="active">Live Deals</a></li>
+            <li><a onclick="showSection('sectors')">Sectors</a></li>
+            <li><a onclick="showSection('regions')">Regions</a></li>
+            <li><a onclick="showSection('analysis')">Analysis</a></li>
+            <li><a onclick="showSection('intelligence')">Intelligence</a></li>
+        </ul>
+        <div class="nav-right">
+            <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">🌙</button>
+            <button class="btn-access">Get Access</button>
+        </div>
+    </nav>
+
+    <!-- TICKER -->
+    <div class="ticker">
+        <div class="ticker-label">LIVE M&A</div>
+        <div class="ticker-content" id="tickerContent"></div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <main>
+        <!-- LANDING PAGE -->
+        <div id="landing" class="section active">
+            <div class="landing-page">
+                <div class="landing-hero">
+                    <h1>Global <span>M&A Intelligence</span> Platform</h1>
+                    <p>Real-time deal flow, sector analysis, and AI-powered market intelligence for institutional investors and M&A professionals.</p>
+                </div>
+
+                <div class="landing-stats">
+                    <div class="stat-card">
+                        <div class="stat-card-num">$847B</div>
+                        <div class="stat-card-label">YTD Deal Volume</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-num">2,184</div>
+                        <div class="stat-card-label">Deals This Quarter</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-num">34</div>
+                        <div class="stat-card-label">Mega-Deals (>$5B)</div>
+                    </div>
+                </div>
+
+                <div class="landing-cta">
+                    <div class="cta-card" onclick="showSection('deals')">
+                        <div class="cta-icon">📊</div>
+                        <div class="cta-title">Live Deals</div>
+                        <p class="cta-desc">Explore real-time M&A transactions with advanced filtering by sector, region, and deal status.</p>
+                        <button class="cta-btn">Explore Deals →</button>
+                    </div>
+                    <div class="cta-card" onclick="showSection('makedeals')">
+                        <div class="cta-icon">🎯</div>
+                        <div class="cta-title">Make Deals</div>
+                        <p class="cta-desc">Build custom M&A transactions, analyze targets, and model acquisition scenarios.</p>
+                        <button class="cta-btn">Start Building →</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DEALS SECTION -->
+        <div id="deals" class="section">
+            <div class="section-content">
+                <div class="sec-eyebrow">Live Deal Flow</div>
+                <h2 class="sec-title">Global <em>M&A Deals</em></h2>
+                <p class="sec-desc">Complete coverage of past, present, and future mergers & acquisitions across every sector and region worldwide.</p>
+                <div class="divider"></div>
+
+                <div class="stats-grid" id="statsGrid"></div>
+
+                <div class="deal-era-tabs">
+                    <button class="deal-era-btn active" onclick="switchEra('present')">
+                        <span class="era-dot present-dot"></span> Present Deals
+                    </button>
+                    <button class="deal-era-btn" onclick="switchEra('past')">
+                        <span class="era-dot past-dot"></span> Past Deals
+                    </button>
+                    <button class="deal-era-btn" onclick="switchEra('future')">
+                        <span class="era-dot future-dot"></span> Future Deals
+                    </button>
+                </div>
+
+                <div class="filter-bar">
+                    <input type="text" id="dealSearch" placeholder="Search acquirer, target or sector..." onkeyup="filterDeals()">
+                    <select id="sectorFilter" onchange="filterDeals()">
+                        <option value="">All Sectors</option>
+                        <option value="Technology">Technology</option>
+                        <option value="Healthcare">Healthcare</option>
+                        <option value="Energy">Energy</option>
+                        <option value="Finance">Finance</option>
+                        <option value="Consumer">Consumer</option>
+                        <option value="Industrials">Industrials</option>
+                        <option value="Real Estate">Real Estate</option>
+                        <option value="Media">Media</option>
+                        <option value="Telecoms">Telecoms</option>
+                    </select>
+                    <select id="regionFilter" onchange="filterDeals()">
+                        <option value="">All Regions</option>
+                        <option value="North America">North America</option>
+                        <option value="Europe">Europe</option>
+                        <option value="Asia Pacific">Asia Pacific</option>
+                        <option value="Middle East">Middle East</option>
+                        <option value="Latin America">Latin America</option>
+                        <option value="Global">Global</option>
+                    </select>
+                </div>
+
+                <div class="table-wrapper">
+                    <table class="deals-table" id="dealsTable">
+                        <thead>
+                            <tr>
+                                <th>#</th><th>Acquirer</th><th>Target</th><th>Deal Value</th>
+                                <th>Sector</th><th>Region</th><th>Date</th><th>Type</th><th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dealsBody"></tbody>
+                    </table>
+                </div>
+                <div style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 1rem; text-align: right;" id="dealCount"></div>
+            </div>
+        </div>
+
+        <!-- SECTORS SECTION -->
+        <div id="sectors" class="section">
+            <div class="section-content">
+                <div class="sec-eyebrow">Sector Intelligence</div>
+                <h2 class="sec-title">M&A by <em>Sector</em></h2>
+                <p class="sec-desc">Deep-dive into M&A activity across every major industry vertical. Click any company for deal history and acquisition profile.</p>
+                <div class="divider"></div>
+
+                <div class="sector-tabs" id="sectorTabs"></div>
+
+                <div class="company-grid" id="companyGrid"></div>
+            </div>
+        </div>
+
+        <!-- REGIONS SECTION -->
+        <div id="regions" class="section">
+            <div class="section-content">
+                <div class="sec-eyebrow">Regional Intelligence</div>
+                <h2 class="sec-title">M&A by <em>Region</em></h2>
+                <p class="sec-desc">Geographic breakdown of global M&A activity — deal volumes, regulatory environments, and strategic trends by region.</p>
+                <div class="divider"></div>
+
+                <div class="three-col" id="regionsGrid"></div>
+
+                <div style="margin-bottom: 2.5rem;">
+                    <div style="font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent-gold); margin-bottom: 1rem; font-weight: 700;">Live Alerts & Updates</div>
+                    <div class="alerts-container" id="alertsContainer"></div>
+                </div>
+
+                <div class="signal-grid" id="signalsGrid"></div>
+            </div>
+        </div>
+
+        <!-- ANALYSIS SECTION -->
+        <div id="analysis" class="section">
+            <div class="section-content">
+                <div class="sec-eyebrow">AI Deal Intelligence</div>
+                <h2 class="sec-title">M&A <em>Analysis</em></h2>
+                <p class="sec-desc">Institutional-grade AI analysis of global deal flow, sector trends, and regulatory risk — powered by real-time M&A data.</p>
+                <div class="divider"></div>
+
+                <div class="analysis-layout">
+                    <div class="chat-container">
+                        <div class="chat-header">
+                            <div class="chat-header-title">M&A INTELLIGENCE ENGINE · GPT-4 POWERED</div>
+                            <div class="chat-status">Online</div>
+                        </div>
+                        <div class="chat-messages" id="chatMessages"></div>
+                        <div class="chat-input-row">
+                            <input type="text" class="chat-input" id="chatInput" placeholder="Ask about deals, sectors, valuations...">
+                            <button class="chat-send" onclick="sendMessage()">SEND</button>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="quick-queries">
+                            <div class="quick-label">Quick Queries</div>
+                            <div class="quick-btns" id="quickBtns"></div>
+                        </div>
+
+                        <div class="card" style="margin-top: 1rem;">
+                            <div style="font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent-gold); margin-bottom: 1rem; font-weight: 700;">Intelligence Capabilities</div>
+                            <div style="display: flex; gap: 0.75rem; padding: 0.75rem 0; border-bottom: 1px solid var(--border-color);">
+                                <span style="font-size: 1.2rem;">📊</span>
+                                <div>
+                                    <div style="font-size: 0.85rem; font-weight: 700; color: var(--text-primary);">Deal Screening</div>
+                                    <div style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 0.2rem;">Filter by sector, region, size, and status</div>
+                                </div>
+                            </div>
+                            <div style="display: flex; gap: 0.75rem; padding: 0.75rem 0; border-bottom: 1px solid var(--border-color);">
+                                <span style="font-size: 1.2rem;">⚖️</span>
+                                <div>
+                                    <div style="font-size: 0.85rem; font-weight: 700; color: var(--text-primary);">Regulatory Analysis</div>
+                                    <div style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 0.2rem;">DOJ, FTC, EU CMA risk assessment</div>
+                                </div>
+                            </div>
+                            <div style="display: flex; gap: 0.75rem; padding: 0.75rem 0; border-bottom: 1px solid var(--border-color);">
+                                <span style="font-size: 1.2rem;">💰</span>
+                                <div>
+                                    <div style="font-size: 0.85rem; font-weight: 700; color: var(--text-primary);">Valuation Multiples</div>
+                                    <div style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 0.2rem;">EV/EBITDA, P/E, and premium analysis</div>
+                                </div>
+                            </div>
+                            <div style="display: flex; gap: 0.75rem; padding: 0.75rem 0;">
+                                <span style="font-size: 1.2rem;">🔮</span>
+                                <div>
+                                    <div style="font-size: 0.85rem; font-weight: 700; color: var(--text-primary);">Deal Prediction</div>
+                                    <div style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 0.2rem;">AI-powered likelihood scoring</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- INTELLIGENCE SECTION -->
+        <div id="intelligence" class="section">
+            <div class="section-content">
+                <div class="sec-eyebrow">Market Intelligence</div>
+                <h2 class="sec-title">Deal Flow <em>Intelligence</em></h2>
+                <p class="sec-desc">Real-time analytics and market intelligence across global M&A activity, sector trends, and deal flow metrics.</p>
+                <div class="divider"></div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 2.5rem;" id="kpiGrid"></div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2.5rem;">
+                    <div class="card">
+                        <div style="font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent-gold); margin-bottom: 1rem; font-weight: 700;">Market Commentary</div>
+                        <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.1rem; font-weight: 800; color: var(--text-primary); margin-bottom: 1rem;">Q4 2024 M&A Outlook</div>
+                        <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.8;">Global M&A activity is accelerating into Q4 2024 as interest rate stabilisation unlocks deal financing. Technology and energy consolidation remain the dominant themes, with AI infrastructure and critical minerals driving the largest transactions. Regulatory scrutiny from the DOJ and EU continues to extend timelines for cross-border deals, particularly in technology.</p>
+                    </div>
+                    <div class="card">
+                        <div style="font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent-gold); margin-bottom: 1rem; font-weight: 700;">2025 Deal Forecast</div>
+                        <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.1rem; font-weight: 800; color: var(--text-primary); margin-bottom: 1rem;">Projected $4.5T Global Volume</div>
+                        <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.8;">Analysts project global M&A volume to reach $4.5T in 2025, driven by PE buyout acceleration ($3.9T dry powder), strategic technology consolidation, and energy transition M&A. Healthcare and AI infrastructure are expected to lead deal count growth, with average deal sizes expanding as mega-deals return to pre-2022 levels.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MAKE DEALS SECTION -->
+        <div id="makedeals" class="section">
+            <div class="section-content">
+                <div class="sec-eyebrow">Deal Creation Suite</div>
+                <h2 class="sec-title">Make <em>Deals</em></h2>
+                <p class="sec-desc">Explore acquisition targets by sector, analyse share price and valuation, and model your own M&A transaction.</p>
+                <div class="divider"></div>
+
+                <div id="mdContent"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div>
+            <div class="footer-logo">M&A <span>Hub</span></div>
+            <div class="footer-text">Global M&A Intelligence Platform</div>
+        </div>
+        <div class="footer-links">
+            <a onclick="showSection('deals')">Live Deals</a>
+            <a onclick="showSection('sectors')">Sectors</a>
+            <a onclick="showSection('regions')">Regions</a>
+            <a onclick="showSection('analysis')">Analysis</a>
+            <a onclick="showSection('intelligence')">Intelligence</a>
+            <a onclick="showSection('makedeals')">Make Deals</a>
+        </div>
+        <div class="footer-text">© 2024 M&A Hub. For informational purposes only.</div>
+    </footer>
+
+    <script>
+        // ===== THEME MANAGEMENT =====
+        function toggleTheme() {
+            const html = document.documentElement;
+            const themeToggle = document.getElementById('themeToggle');
+            
+            if (html.classList.contains('dark-mode')) {
+                html.classList.remove('dark-mode');
+                themeToggle.textContent = '🌙';
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.classList.add('dark-mode');
+                themeToggle.textContent = '☀️';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Load saved theme
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            const html = document.documentElement;
+            const themeToggle = document.getElementById('themeToggle');
+            
+            if (savedTheme === 'dark') {
+                html.classList.add('dark-mode');
+                themeToggle.textContent = '☀️';
+            }
+        });
+
+        // ===== NAVIGATION =====
+        function showSection(id) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            
+            const backBtn = document.getElementById('backBtn');
+            if (id === 'landing') {
+                backBtn.classList.remove('visible');
+            } else {
+                backBtn.classList.add('visible');
+            }
+
+            document.querySelectorAll('.nav-center a').forEach(a => a.classList.remove('active'));
+            if (id !== 'landing') {
+                const activeLink = document.querySelector(`.nav-center a[onclick*="'${id}'"]`);
+                if (activeLink) activeLink.classList.add('active');
+            }
+        }
+
+        function goHome() {
+            showSection('landing');
+        }
+
+        // ===== ALL DATA =====
+        const DEALS_DATA = {
+            'present': [
+                {'acquirer': 'Capital One', 'target': 'Discover Financial', 'value': '$35.3B', 'sector': 'Finance', 'region': 'North America', 'date': 'Feb 2024', 'type': 'Acquisition', 'status': 'PENDING'},
+                {'acquirer': 'Synopsys', 'target': 'Ansys', 'value': '$35.0B', 'sector': 'Technology', 'region': 'North America', 'date': 'Jan 2024', 'type': 'Merger', 'status': 'PENDING'},
+                {'acquirer': 'Mars Inc.', 'target': 'Kellanov', 'value': '$36.0B', 'sector': 'Consumer', 'region': 'North America', 'date': 'Aug 2024', 'type': 'Acquisition', 'status': 'PENDING'},
+                {'acquirer': 'Chevron', 'target': 'Hess Corporation', 'value': '$53.0B', 'sector': 'Energy', 'region': 'North America', 'date': 'Oct 2023', 'type': 'Acquisition', 'status': 'PENDING'},
+                {'acquirer': 'Nippon Steel', 'target': 'U.S. Steel', 'value': '$14.9B', 'sector': 'Industrials', 'region': 'North America', 'date': 'Dec 2023', 'type': 'Acquisition', 'status': 'PENDING'},
+                {'acquirer': 'Rio Tinto', 'target': 'Arcadium Lithium', 'value': '$6.7B', 'sector': 'Energy', 'region': 'Global', 'date': 'Oct 2024', 'type': 'Acquisition', 'status': 'PENDING'},
+                {'acquirer': 'Hewlett Packard Enterprise', 'target': 'Juniper Networks', 'value': '$14.0B', 'sector': 'Technology', 'region': 'North America', 'date': 'Jan 2024', 'type': 'Acquisition', 'status': 'PENDING'},
+                {'acquirer': 'LVMH', 'target': "Tod's Group", 'value': '$1.5B', 'sector': 'Consumer', 'region': 'Europe', 'date': 'Apr 2024', 'type': 'Acquisition', 'status': 'RUMORED'},
+                {'acquirer': 'Uber', 'target': 'Instacart (stake)', 'value': '$500M', 'sector': 'Consumer', 'region': 'North America', 'date': 'Mar 2024', 'type': 'Minority Stake', 'status': 'RUMORED'},
+                {'acquirer': 'Sony', 'target': 'Kadokawa Corporation', 'value': '$1.8B', 'sector': 'Media', 'region': 'Asia Pacific', 'date': 'Jan 2025', 'type': 'Acquisition', 'status': 'PENDING'},
+                {'acquirer': 'SoftBank', 'target': 'Ampere Computing', 'value': '$4.5B', 'sector': 'Technology', 'region': 'North America', 'date': 'Dec 2024', 'type': 'Acquisition', 'status': 'PENDING'},
+                {'acquirer': 'Alphabet', 'target': 'Wiz', 'value': '$23.0B', 'sector': 'Technology', 'region': 'Global', 'date': 'Jul 2024', 'type': 'Acquisition', 'status': 'PENDING'},
+                {'acquirer': 'Saudi Aramco', 'target': 'Rabigh Refining', 'value': '$3.3B', 'sector': 'Energy', 'region': 'Middle East', 'date': 'Nov 2024', 'type': 'Acquisition', 'status': 'PENDING'},
+                {'acquirer': 'Sanofi', 'target': 'Blueprint Medicines', 'value': '$7.0B', 'sector': 'Healthcare', 'region': 'North America', 'date': 'Oct 2024', 'type': 'Acquisition', 'status': 'PENDING'},
+                {'acquirer': 'Alibaba', 'target': 'Sun Art Retail', 'value': '$3.6B', 'sector': 'Consumer', 'region': 'Asia Pacific', 'date': 'Sep 2024', 'type': 'Buyout', 'status': 'PENDING'},
+            ],
+            'past': [
+                {'acquirer': 'Microsoft', 'target': 'Activision Blizzard', 'value': '$68.7B', 'sector': 'Technology', 'region': 'North America', 'date': 'Oct 2023', 'type': 'Acquisition', 'status': 'CLOSED'},
+                {'acquirer': 'ExxonMobil', 'target': 'Pioneer Natural Resources', 'value': '$59.5B', 'sector': 'Energy', 'region': 'North America', 'date': 'May 2024', 'type': 'Acquisition', 'status': 'CLOSED'},
+                {'acquirer': 'Broadcom', 'target': 'VMware', 'value': '$61.0B', 'sector': 'Technology', 'region': 'North America', 'date': 'Nov 2023', 'type': 'Acquisition', 'status': 'CLOSED'},
+                {'acquirer': 'Pfizer', 'target': 'Seagen', 'value': '$43.0B', 'sector': 'Healthcare', 'region': 'North America', 'date': 'Dec 2023', 'type': 'Acquisition', 'status': 'CLOSED'},
+                {'acquirer': 'Amazon', 'target': 'MGM Holdings', 'value': '$8.45B', 'sector': 'Media', 'region': 'North America', 'date': 'Mar 2022', 'type': 'Acquisition', 'status': 'CLOSED'},
+                {'acquirer': 'Nvidia', 'target': 'Arm Holdings', 'value': '$66.0B', 'sector': 'Technology', 'region': 'Global', 'date': 'Feb 2022', 'type': 'Acquisition', 'status': 'CLOSED'},
+                {'acquirer': 'JPMorgan Chase', 'target': 'First Republic Bank', 'value': '$10.6B', 'sector': 'Finance', 'region': 'North America', 'date': 'Mar 2023', 'type': 'Acquisition', 'status': 'CLOSED'},
+                {'acquirer': 'Berkshire Hathaway', 'target': 'Occidental Petroleum', 'value': '$11.4B', 'sector': 'Energy', 'region': 'North America', 'date': 'Apr 2024', 'type': 'Acquisition', 'status': 'CLOSED'},
+            ],
+            'future': [
+                {'acquirer': 'Tesla', 'target': 'Redwood Materials', 'value': '$5.0B', 'sector': 'Energy', 'region': 'North America', 'date': 'Q2 2025', 'type': 'Acquisition', 'status': 'RUMORED'},
+                {'acquirer': 'Apple', 'target': 'SoundHound AI', 'value': '$2.5B', 'sector': 'Technology', 'region': 'North America', 'date': 'Q3 2025', 'type': 'Acquisition', 'status': 'RUMORED'},
+                {'acquirer': 'Google', 'target': 'Anthropic', 'value': '$2.0B', 'sector': 'Technology', 'region': 'North America', 'date': 'Q1 2025', 'type': 'Investment', 'status': 'RUMORED'},
+                {'acquirer': 'Meta', 'target': 'Hugging Face', 'value': '$1.5B', 'sector': 'Technology', 'region': 'Global', 'date': 'Q2 2025', 'type': 'Acquisition', 'status': 'RUMORED'},
+                {'acquirer': 'Thermo Fisher', 'target': 'Illumina', 'value': '$7.1B', 'sector': 'Healthcare', 'region': 'North America', 'date': 'Q3 2025', 'type': 'Acquisition', 'status': 'RUMORED'},
+            ]
+        };
+
+        const SECTORS_DATA = {
+            'Technology': [
+                {'name': 'Apple Inc.', 'ticker': 'AAPL', 'price': '$213.49', 'up': true, 'chg': '+1.2%', 'marketcap': '$3.28T', 'country': '🇺🇸 USA', 'badges': ['Consumer Electronics', 'AI', 'Services'], 'desc': "World's most valuable company. Designer and manufacturer of iPhone, Mac, iPad, Apple Watch, and services ecosystem. Dominant in consumer electronics with $383B annual revenue."},
+                {'name': 'Microsoft', 'ticker': 'MSFT', 'price': '$415.32', 'up': true, 'chg': '+0.8%', 'marketcap': '$3.08T', 'country': '🇺🇸 USA', 'badges': ['Cloud', 'AI', 'Enterprise', 'Active Acquirer'], 'desc': 'Cloud computing leader (Azure), enterprise software (Office 365), LinkedIn, Xbox/Activision gaming empire.'},
+                {'name': 'Nvidia', 'ticker': 'NVDA', 'price': '$121.40', 'up': true, 'chg': '+3.2%', 'marketcap': '$2.97T', 'country': '🇺🇸 USA', 'badges': ['AI Chips', 'Data Centers', 'Strategic Target'], 'desc': 'Dominant AI chip designer. GPUs power 90%+ of AI training. Data center revenue surpassed $47B, positioning as AI infrastructure leader.'},
+                {'name': 'Alphabet (Google)', 'ticker': 'GOOGL', 'price': '$172.63', 'up': true, 'chg': '+0.5%', 'marketcap': '$2.13T', 'country': '🇺🇸 USA', 'badges': ['Search', 'Cloud', 'AI', 'Biz-Deal'], 'desc': 'Search, YouTube, Android, Google Cloud, Waymo autonomous vehicles. $307B annual revenue. Pending $23B Wiz acquisition.'},
+                {'name': 'Meta Platforms', 'ticker': 'META', 'price': '$519.77', 'up': true, 'chg': '+1.9%', 'marketcap': '$1.32T', 'country': '🇺🇸 USA', 'badges': ['Social Media', 'AR/VR', 'AI'], 'desc': 'Facebook, Instagram, WhatsApp, and Reality Labs. $380+ annual capex on AI infrastructure.'},
+            ],
+            'Healthcare': [
+                {'name': 'Johnson & Johnson', 'ticker': 'JNJ', 'price': '$155.20', 'up': true, 'chg': '+0.6%', 'marketcap': '$405B', 'country': '🇺🇸 USA', 'badges': ['Pharma', 'Medical Devices', 'Active Acquirer'], 'desc': 'Diversified healthcare giant. Pharmaceuticals, medical devices, consumer health. $95B annual revenue.'},
+                {'name': 'Pfizer', 'ticker': 'PFE', 'price': '$28.45', 'up': true, 'chg': '+1.2%', 'marketcap': '$165B', 'country': '🇺🇸 USA', 'badges': ['Pharma', 'Vaccines', 'Biotech'], 'desc': 'Acquired Seagen ($43B) for oncology. Vaccines, specialty care, primary care divisions.'},
+                {'name': 'Roche Holding', 'ticker': 'RHHBY', 'price': '$42.30', 'up': true, 'chg': '+0.8%', 'marketcap': '$290B', 'country': '🇨🇭 Switzerland', 'badges': ['Pharma', 'Diagnostics', 'Biotech'], 'desc': 'Swiss pharma leader. Diagnostics, oncology, immunology. Active in biotech M&A.'},
+            ],
+            'Energy': [
+                {'name': 'Saudi Aramco', 'ticker': '2222.SR', 'price': '₪46.80', 'up': true, 'chg': '+1.1%', 'marketcap': '$1.9T', 'country': '🇸🇦 Saudi Arabia', 'badges': ['Oil & Gas', 'Refining', 'Chemicals'], 'desc': "World's largest oil producer. Integrated upstream, downstream, chemicals. $160B+ annual revenue."},
+                {'name': 'ExxonMobil', 'ticker': 'XOM', 'price': '$114.30', 'up': true, 'chg': '+0.9%', 'marketcap': '$480B', 'country': '🇺🇸 USA', 'badges': ['Oil & Gas', 'Energy Transition', 'Active Acquirer'], 'desc': 'Acquired Pioneer Natural Resources ($59.5B). Oil, gas, low-carbon solutions focus.'},
+                {'name': 'Chevron', 'ticker': 'CVX', 'price': '$156.80', 'up': true, 'chg': '+1.2%', 'marketcap': '$305B', 'country': '🇺🇸 USA', 'badges': ['Oil & Gas', 'Renewables', 'Acquisitions'], 'desc': 'Acquired Hess ($53B pending). Oil, gas, geothermal, hydrogen focus.'},
+            ],
+            'Finance': [
+                {'name': 'JPMorgan Chase', 'ticker': 'JPM', 'price': '$198.50', 'up': true, 'chg': '+0.8%', 'marketcap': '$550B', 'country': '🇺🇸 USA', 'badges': ['Banking', 'Investment Banking', 'Active Acquirer'], 'desc': 'Acquired First Republic Bank ($10.6B). Investment banking, wealth management, trading.'},
+                {'name': 'Berkshire Hathaway', 'ticker': 'BRK.B', 'price': '$385.60', 'up': true, 'chg': '+1.1%', 'marketcap': '$850B', 'country': '🇺🇸 USA', 'badges': ['Insurance', 'Investments', 'Active Acquirer'], 'desc': 'Conglomerate holding company. Insurance, railroads, utilities, investments. $1T+ portfolio.'},
+                {'name': 'Goldman Sachs', 'ticker': 'GS', 'price': '$420.30', 'up': true, 'chg': '+0.9%', 'marketcap': '$145B', 'country': '🇺🇸 USA', 'badges': ['Investment Banking', 'Trading', 'Wealth Mgmt'], 'desc': 'Leading investment bank. M&A advisory, trading, wealth management. $60B+ annual revenue.'},
+            ],
+            'Consumer': [
+                {'name': 'Amazon', 'ticker': 'AMZN', 'price': '$187.30', 'up': true, 'chg': '+1.4%', 'marketcap': '$1.95T', 'country': '🇺🇸 USA', 'badges': ['E-commerce', 'Cloud', 'Streaming'], 'desc': 'E-commerce leader, AWS cloud, Prime Video, Whole Foods. $575B+ annual revenue.'},
+                {'name': 'Walmart', 'ticker': 'WMT', 'price': '$89.20', 'up': true, 'chg': '+0.5%', 'marketcap': '$405B', 'country': '🇺🇸 USA', 'badges': ['Retail', 'E-commerce', 'Advertising'], 'desc': 'Retail giant. Stores, e-commerce, advertising network, healthcare expansion.'},
+                {'name': 'LVMH Moët Hennessy', 'ticker': 'MC.PA', 'price': '€850.30', 'up': true, 'chg': '+0.8%', 'marketcap': '$350B', 'country': '🇫🇷 France', 'badges': ['Luxury', 'Fashion', 'Active Acquirer'], 'desc': "World's largest luxury goods conglomerate. 75+ brands. Acquired Tod's ($1.5B)."},
+            ],
+        };
+
+        const REGIONS_DATA = [
+            {'flag': '🇺🇸', 'name': 'North America', 'count': '6,840 deals', 'vol': '$412B', 'desc': 'Led by technology, healthcare, and energy consolidation. Strong PE buyout activity and mega-deals above $10B driving YTD volumes higher than 2023 levels.'},
+            {'flag': '🇪🇺', 'name': 'Europe', 'count': '3,210 deals', 'vol': '$198B', 'desc': 'Cross-border M&A recovering as post-ECB rate cycle. UK dealmaking resilient. Germany sees industrial consolidation. Regulatory scrutiny from EU Competition elevated.'},
+            {'flag': '🇯🇵', 'name': 'Asia Pacific', 'count': '4,180 deals', 'vol': '$162B', 'desc': 'China outbound M&A surging amid weak yuan. India domestic deals revive while cross-border deals face regulatory headwinds. Australia mining M&A active.'},
+            {'flag': '🇸🇦', 'name': 'Middle East', 'count': '890 deals', 'vol': '$38B', 'desc': 'Saudi PIF and Abu Dhabi sovereign funds driving acquisitions globally. Aramco and chemicals M&A active. UAE establishing itself as regional M&A hub for multinational.'},
+            {'flag': '🇧🇷', 'name': 'Latin America', 'count': '620 deals', 'vol': '$22B', 'desc': 'Brazil leads regional M&A driven by agribusiness, energy, and fintech. Colombia and Mexico seeing increased PE activity. Regulatory environments improving for FDI.'},
+            {'flag': '🌍', 'name': 'Africa & Rest of World', 'count': '360 deals', 'vol': '$15B', 'desc': 'Critical minerals M&A accelerating in DRC, Zambia, and South Africa. Fintech attracting global acquirers. East African tech hubs driving early-stage deal activity.'},
+        ];
+
+        const ALERTS_DATA = [
+            {'tag': 'REGULATORY', 'text': 'DOJ clears Microsoft/Activision deal. Largest tech acquisition in history closes after 20-month review.'},
+            {'tag': 'MARKET', 'text': 'PE dry powder hits $3.9T record high. Buyout firms accelerating deployment amid stabilizing interest rates.'},
+            {'tag': 'SECTOR', 'text': 'AI infrastructure M&A surges. Chip designers, data center REITs, and cloud providers attract strategic buyers.'},
+            {'tag': 'GEOPOLITICAL', 'text': 'CFIUS scrutiny intensifies on semiconductor deals. National security reviews extending timelines by 6-12 months.'},
+        ];
+
+        const SIGNAL_CARDS_DATA = [
+            {'badge': 'BULLISH', 'title': 'Deal Velocity Accelerating', 'body': 'Announced deal count up 18% YoY. Q4 2024 saw 612 deals announced globally, highest quarterly total since Q1 2021. Interest rate stabilization unlocking financing.', 'color': 'gold'},
+            {'badge': 'CAUTION', 'title': 'Regulatory Risk Elevated', 'body': 'DOJ and FTC blocking 12% of announced deals in 2024. EU CMA scrutiny on tech consolidation. Cross-border deals facing 8-12 month delays.', 'color': 'red'},
+            {'badge': 'OPPORTUNITY', 'title': 'AI Infrastructure Boom', 'body': 'Semiconductor, data center, and cloud infrastructure M&A at record levels. Strategic buyers pursuing AI-adjacent assets. Valuations compressing for non-core assets.', 'color': 'blue'},
+            {'badge': 'TREND', 'title': 'Energy Transition M&A', 'body': 'Renewable energy, battery, and critical minerals M&A surging. Oil majors acquiring clean energy assets. Consolidation in EV supply chain accelerating.', 'color': 'gold'},
+        ];
+
+        const AI_RESPONSES = [
+            "Based on current deal flow data, the technology sector leads with $1.2T in announced transactions YTD. The Synopsys/Ansys merger at $35B and Microsoft/Activision at $68.7B are landmark deals. Would you like a deeper dive into tech M&A trends?",
+            "Regulatory risk assessment: The DOJ cleared the Microsoft/Activision deal after 20 months, setting precedent for mega-deals. However, cross-border tech acquisitions face 8-12 month delays from CFIUS and EU CMA reviews. Antitrust risk remains elevated for horizontal consolidation.",
+            "Energy sector M&A is booming with $540B YTD volume. ExxonMobil's Pioneer Natural Resources acquisition ($59.5B) and Chevron's Hess deal ($53B) signal strategic consolidation. Renewable energy M&A also accelerating as oil majors pivot to energy transition.",
+            "Healthcare M&A reached $380B YTD, driven by Pfizer's Seagen acquisition ($43B) and ongoing consolidation in specialty pharma. GLP-1 obesity drug companies are hot acquisition targets. Biotech consolidation accelerating as mega-pharma seek pipeline fill.",
+            "PE dry powder stands at $3.9T, the highest on record. Buyout firms are deploying capital aggressively into mid-market and lower-middle-market targets. Median deal size for PE-backed acquisitions is $450M, up 12% from prior year.",
+        ];
+
+        let currentEra = 'present';
+        let allDeals = [];
+        let aiResponseIndex = 0;
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            initTicker();
+            loadDeals();
+            loadSectors();
+            loadRegions();
+            loadAnalysis();
+            loadIntelligence();
+            loadMakeDeals();
+        });
+
+        // ===== FUNCTIONS =====
+        function initTicker() {
+            const tickers = [
+                { symbol: 'MSFT/ATVI', price: '$68.7B', change: '+0.3%', up: true },
+                { symbol: 'AMZN/MGM', price: '$8.45B', change: 'CLOSED', up: true },
+                { symbol: 'NVDA/ARM', price: '$66B', change: '-1.2%', up: false },
+                { symbol: 'JPM/FRB', price: '$10.6B', change: 'CLOSED', up: true },
+                { symbol: 'BRK/OXY', price: '$11.4B', change: '+0.8%', up: true },
+                { symbol: 'CVX/HES', price: '$53B', change: 'PENDING', up: false },
+                { symbol: 'MARS/KLLV', price: '$36B', change: 'PENDING', up: false },
+                { symbol: 'CAPONE/DFS', price: '$35.3B', change: 'PENDING', up: false },
+                { symbol: 'RIO/ALTM', price: '$6.7B', change: 'PENDING', up: false },
+            ];
+
+            let html = '';
+            tickers.forEach(t => {
+                html += `<div class="ticker-item ${t.up ? 'up' : 'dn'}">
+                    <span class="symbol">${t.symbol}</span>
+                    <span class="price">${t.price}</span>
+                    <span class="change">${t.change}</span>
+                </div>`;
+            });
+            html += html;
+            document.getElementById('tickerContent').innerHTML = html;
+        }
+
+        function loadDeals() {
+            allDeals = DEALS_DATA[currentEra] || [];
+            renderDeals(allDeals);
+            renderStats();
+        }
+
+        function renderStats() {
+            const stats = [
+                { num: '$847B', label: 'YTD Deal Value', chg: '↑ 14.2% vs. prior year', up: true },
+                { num: '2,184', label: 'Deals This Quarter', chg: '↑ 8.7% QoQ', up: true },
+                { num: '$388M', label: 'Avg. Deal Size', chg: '↓ 2.1% vs. Q3', up: false },
+                { num: '34', label: 'Mega-Deals (>$5B)', chg: '↑ 6 vs. prior qtr', up: true },
+            ];
+
+            let html = '';
+            stats.forEach(s => {
+                html += `<div class="stat-box">
+                    <span class="stat-num">${s.num}</span>
+                    <div class="stat-label">${s.label}</div>
+                    <div class="stat-change ${s.up ? 'up' : 'dn'}">${s.chg}</div>
+                </div>`;
+            });
+            document.getElementById('statsGrid').innerHTML = html;
+        }
+
+        function renderDeals(deals) {
+            let html = '';
+            deals.forEach((d, i) => {
+                html += `<tr>
+                    <td style="color: var(--text-secondary); font-size: 0.8rem;">${i + 1}</td>
+                    <td><span style="font-weight: 600;">${d.acquirer}</span></td>
+                    <td><strong style="color: var(--text-primary);">${d.target}</strong></td>
+                    <td class="deal-value">${d.value}</td>
+                    <td>${d.sector}</td>
+                    <td>${d.region}</td>
+                    <td style="color: var(--text-secondary); font-size: 0.8rem;">${d.date}</td>
+                    <td style="font-size: 0.75rem; color: var(--text-secondary);">${d.type}</td>
+                    <td><span class="deal-status status-${d.status.toLowerCase()}">${d.status}</span></td>
+                </tr>`;
+            });
+            document.getElementById('dealsBody').innerHTML = html;
+            document.getElementById('dealCount').textContent = `Showing ${deals.length} deal${deals.length !== 1 ? 's' : ''}`;
+        }
+
+        function switchEra(era) {
+            currentEra = era;
+            document.querySelectorAll('.deal-era-btn').forEach(b => b.classList.remove('active'));
+            event.target.closest('.deal-era-btn').classList.add('active');
+            loadDeals();
+            document.getElementById('dealSearch').value = '';
+            document.getElementById('sectorFilter').value = '';
+            document.getElementById('regionFilter').value = '';
+        }
+
+        function filterDeals() {
+            const search = document.getElementById('dealSearch').value.toLowerCase();
+            const sector = document.getElementById('sectorFilter').value;
+            const region = document.getElementById('regionFilter').value;
+
+            const filtered = allDeals.filter(d => {
+                if (search && !d.acquirer.toLowerCase().includes(search) &&
+                    !d.target.toLowerCase().includes(search) &&
+                    !d.sector.toLowerCase().includes(search)) return false;
+                if (sector && d.sector !== sector) return false;
+                if (region && d.region !== region) return false;
+                return true;
+            });
+
+            renderDeals(filtered);
+        }
+
+        function loadSectors() {
+            let tabsHtml = '';
+            for (const [sector] of Object.entries(SECTORS_DATA)) {
+                tabsHtml += `<button class="sector-tab ${sector === 'Technology' ? 'active' : ''}" onclick="switchSector('${sector}')">${sector}</button>`;
+            }
+            document.getElementById('sectorTabs').innerHTML = tabsHtml;
+            renderSectorCompanies('Technology');
+        }
+
+        function switchSector(sector) {
+            document.querySelectorAll('.sector-tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            renderSectorCompanies(sector);
+        }
+
+        function renderSectorCompanies(sector) {
+            const companies = SECTORS_DATA[sector] || [];
+            let html = '';
+            companies.forEach(c => {
+                html += `<div class="company-card">
+                    <div class="co-header">
+                        <div>
+                            <div class="co-name">${c.name}</div>
+                            <div class="co-meta">${c.ticker} · ${c.country}</div>
+                        </div>
+                        <div class="co-price">
+                            <div class="co-price-val ${c.up ? 'up' : 'dn'}">${c.price}</div>
+                            <div class="co-price-chg ${c.up ? 'up' : 'dn'}">${c.chg || '—'}</div>
+                        </div>
+                    </div>
+                    <div class="co-badges">
+                        ${c.badges.map(b => `<span class="badge badge-dim">${b}</span>`).join('')}
+                    </div>
+                    <div class="co-desc">${c.desc}</div>
+                    <div class="co-cta">${c.cta || 'View M&A Profile'}</div>
+                </div>`;
+            });
+            document.getElementById('companyGrid').innerHTML = html;
+        }
+
+        function loadRegions() {
+            let regionsHtml = '';
+            REGIONS_DATA.forEach(r => {
+                regionsHtml += `<div class="region-card">
+                    <span class="region-flag">${r.flag}</span>
+                    <div class="region-name">${r.name}</div>
+                    <div class="region-count">${r.count}</div>
+                    <div>
+                        <div class="region-vol">${r.vol}</div>
+                        <div class="region-vol-label">YTD Deal Volume</div>
+                    </div>
+                    <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.7; margin-top: 1rem;">${r.desc}</p>
+                </div>`;
+            });
+            document.getElementById('regionsGrid').innerHTML = regionsHtml;
+
+            let alertsHtml = '';
+            ALERTS_DATA.forEach(a => {
+                alertsHtml += `<div class="alert-item">
+                    <span class="alert-tag">${a.tag}</span>
+                    <span class="alert-text">${a.text}</span>
+                </div>`;
+            });
+            document.getElementById('alertsContainer').innerHTML = alertsHtml;
+
+            let signalsHtml = '';
+            SIGNAL_CARDS_DATA.forEach(s => {
+                const colorMap = { gold: 'rgba(201, 168, 76, 0.2)', red: 'rgba(207, 68, 68, 0.2)', blue: 'rgba(74, 143, 193, 0.2)' };
+                const textColorMap = { gold: 'var(--accent-gold)', red: 'var(--accent-red)', blue: 'var(--accent-blue)' };
+                signalsHtml += `<div class="signal-card">
+                    <div class="signal-badge" style="background: ${colorMap[s.color]}; color: ${textColorMap[s.color]};">${s.badge}</div>
+                    <div class="signal-title">${s.title}</div>
+                    <p class="signal-body">${s.body}</p>
+                </div>`;
+            });
+            document.getElementById('signalsGrid').innerHTML = signalsHtml;
+        }
+
+        function loadAnalysis() {
+            const initialMsg = "Welcome to M&A Hub Intelligence. I'm your AI-powered deal analyst. Ask me about current deals, sector trends, regulatory risks, or valuation multiples across any market.";
+            let html = `<div class="msg msg-ai">
+                <div class="msg-label">⬡ M&A AI</div>
+                <div>${initialMsg}</div>
+            </div>`;
+            document.getElementById('chatMessages').innerHTML = html;
+
+            const quickQueries = [
+                "What are the largest pending deals right now?",
+                "Which sectors have the highest M&A activity?",
+                "What is the regulatory risk for tech acquisitions?",
+                "Show me recent healthcare M&A trends",
+                "What PE buyout activity is expected in 2025?",
+            ];
+
+            let quickHtml = '';
+            quickQueries.forEach(q => {
+                quickHtml += `<button class="quick-btn" onclick="sendMessage('${q.replace(/'/g, "\\'")}')">${q}</button>`;
+            });
+            document.getElementById('quickBtns').innerHTML = quickHtml;
+        }
+
+        function sendMessage(text) {
+            const input = document.getElementById('chatInput');
+            const msg = text || input.value.trim();
+            if (!msg) return;
+
+            const messagesDiv = document.getElementById('chatMessages');
+            const userMsg = document.createElement('div');
+            userMsg.className = 'msg msg-user';
+            userMsg.innerHTML = `<div class="msg-label">▶ YOU</div><div>${msg}</div>`;
+            messagesDiv.appendChild(userMsg);
+
+            input.value = '';
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+
+            setTimeout(() => {
+                const response = AI_RESPONSES[aiResponseIndex % AI_RESPONSES.length];
+                aiResponseIndex++;
+
+                const aiMsg = document.createElement('div');
+                aiMsg.className = 'msg msg-ai';
+                aiMsg.innerHTML = `<div class="msg-label">⬡ M&A AI</div><div>${response}</div>`;
+                messagesDiv.appendChild(aiMsg);
+                messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            }, 1400);
+        }
+
+        function loadIntelligence() {
+            const kpiData = [
+                { label: 'Global Deal Volume YTD', val: '$847B', chg: '+14.2%', up: true },
+                { label: 'Avg. Premium Paid', val: '32.4%', chg: '+2.1pp', up: true },
+                { label: 'Avg. Close Time', val: '8.4 mo', chg: '+0.6 mo', up: false },
+                { label: 'Failed Deals YTD', val: '14', chg: '-3 vs prior yr', up: true },
+                { label: 'PE Dry Powder', val: '$3.9T', chg: '+8.2%', up: true },
+                { label: 'Cross-border Deals', val: '38%', chg: '+4pp', up: true },
+            ];
+
+            let html = '';
+            kpiData.forEach(k => {
+                html += `<div class="card">
+                    <div style="font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 0.5rem; font-weight: 700;">${k.label}</div>
+                    <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.6rem; font-weight: 800; color: var(--accent-gold); letter-spacing: -0.02em;">${k.val}</div>
+                    <div style="font-size: 0.75rem; color: ${k.up ? 'var(--accent-green)' : 'var(--accent-red)'}; margin-top: 0.5rem; font-weight: 600;">${k.chg}</div>
+                </div>`;
+            });
+            document.getElementById('kpiGrid').innerHTML = html;
+        }
+
+        function loadMakeDeals() {
+            const sectors = [
+                {'id': 'tech', 'name': 'Technology', 'icon': '💻', 'desc': 'Software, hardware, semiconductors, AI, cloud & cybersecurity', 'dealVol': '$1.2T', 'deals': '420'},
+                {'id': 'healthcare', 'name': 'Healthcare', 'icon': '🏥', 'desc': 'Pharma, biotech, med-tech, diagnostics & health services', 'dealVol': '$380B', 'deals': '218'},
+                {'id': 'energy', 'name': 'Energy', 'icon': '⚡', 'desc': 'Oil & gas, renewables, utilities, mining & battery metals', 'dealVol': '$540B', 'deals': '184'},
+                {'id': 'finance', 'name': 'Finance', 'icon': '🏦', 'desc': 'Banking, insurance, asset management, fintech & payments', 'dealVol': '$620B', 'deals': '312'},
+                {'id': 'consumer', 'name': 'Consumer', 'icon': '🛍️', 'desc': 'Retail, food & beverage, luxury, e-commerce & FMCG', 'dealVol': '$290B', 'deals': '256'},
+            ];
+
+            let html = '';
+            sectors.forEach(s => {
+                html += `<div class="md-sector-card" onclick="alert('Sector: ${s.name}')">
+                    <div class="md-sector-icon">${s.icon}</div>
+                    <div class="md-sector-title">${s.name}</div>
+                    <div class="md-sector-sub">${s.desc}</div>
+                    <div class="md-sector-stats">
+                        <div>
+                            <div class="md-sector-stat-num" style="color: var(--accent-gold);">${s.dealVol}</div>
+                            <div class="md-sector-stat-lbl">Deal Vol.</div>
+                        </div>
+                        <div>
+                            <div class="md-sector-stat-num" style="color: var(--text-primary);">${s.deals}</div>
+                            <div class="md-sector-stat-lbl">Active Deals</div>
+                        </div>
+                    </div>
+                </div>`;
+            });
+            document.getElementById('mdContent').innerHTML = html;
+        }
+    </script>
+</body>
+</html>
